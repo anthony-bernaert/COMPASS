@@ -29,6 +29,12 @@
     <Setting Name="ListShowEditIcon" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+	<Setting Name="ListShowDescription" Type="System.Boolean" Scope="User">
+	  <Value Profile="(Default)">False</Value>
+	</Setting>
+	<Setting Name="ListShowPath" Type="System.Boolean" Scope="User">
+	  <Value Profile="(Default)">False</Value>
+	</Setting>
     <Setting Name="TileShowExtraData" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>

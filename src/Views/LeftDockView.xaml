@@ -565,6 +565,8 @@
                                         <CheckBox Content="Show Tags" IsChecked="{Binding ShowTags}"/>
                                         <CheckBox Content="Show Version" IsChecked="{Binding ShowVersion}"/>
                                         <CheckBox Content="Show File Icons" IsChecked="{Binding ShowFileIcons}"/>
+                                        <CheckBox Content="Show Description" IsChecked="{Binding ShowDescription}"/>
+                                        <CheckBox Content="Show Local Path" IsChecked="{Binding ShowPath}"/>
                                     </StackPanel>
                                 </DataTemplate>
                                 <DataTemplate DataType="{x:Type layouts:CardLayoutViewModel}">

@@ -110,5 +110,25 @@ namespace COMPASS.Models.Preferences
                 OnPropertyChanged();
             }
         }
+
+        public bool ShowDescription
+        {
+            get => Properties.Settings.Default.ListShowDescription;
+            set
+            {
+                Properties.Settings.Default.ListShowDescription = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool ShowPath
+        {
+            get => Properties.Settings.Default.ListShowPath;
+            set
+            {
+                Properties.Settings.Default.ListShowPath = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }
