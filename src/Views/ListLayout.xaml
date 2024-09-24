@@ -41,6 +41,8 @@
                             <MenuItem Header="Tags"         IsCheckable="True" IsChecked="{Binding Data.Preferences.ShowTags,       Source={StaticResource LayoutProxy}}"/>
                             <MenuItem Header="Version"      IsCheckable="True" IsChecked="{Binding Data.Preferences.ShowVersion,    Source={StaticResource LayoutProxy}}"/>
                             <MenuItem Header="File Icons"   IsCheckable="True" IsChecked="{Binding Data.Preferences.ShowFileIcons,  Source={StaticResource LayoutProxy}}"/>
+                            <MenuItem Header="Description"  IsCheckable="True" IsChecked="{Binding Data.Preferences.ShowDescription,Source={StaticResource LayoutProxy}}"/>
+                            <MenuItem Header="Local Path"   IsCheckable="True" IsChecked="{Binding Data.Preferences.ShowPath,       Source={StaticResource LayoutProxy}}"/>
                         </ContextMenu>
                     </Setter.Value>
                 </Setter>
@@ -108,7 +110,7 @@
                                     Visibility="{Binding Source={StaticResource LayoutProxy}, Path=Data.Preferences.ShowTitle, Converter={StaticResource ToVisibilityConverter}}">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <TextBlock Text ="{Binding Title}" Style="{StaticResource default}" Margin="5,0"/>
+                        <TextBlock Text ="{Binding Title}" Style="{StaticResource default}" ToolTip="{Binding Sources.Path}" Margin="5,0"/>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -192,6 +194,22 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
             <!--<DataGridTextColumn Width="*"/>-->
+            <DataGridTemplateColumn Header="Local Path" Width="*" MinWidth="120"
+                                    Visibility="{Binding Source={StaticResource LayoutProxy}, Path=Data.Preferences.ShowPath, Converter={StaticResource ToVisibilityConverter}}">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Text ="{Binding Sources.Path}" Style="{StaticResource default}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Description" Width="*" MinWidth="120"
+                                    Visibility="{Binding Source={StaticResource LayoutProxy}, Path=Data.Preferences.ShowDescription, Converter={StaticResource ToVisibilityConverter}}">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Text ="{Binding Description}" Style="{StaticResource default}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
             <DataGridTemplateColumn Header="" MinWidth="70" Width="*" CanUserResize="False"
                                     Visibility="{Binding Source={StaticResource LayoutProxy}, Path=Data.Preferences.ShowFileIcons, Converter={StaticResource ToVisibilityConverter}}">
                 <DataGridTemplateColumn.CellTemplate>
@@ -199,6 +217,8 @@
                         <StackPanel x:Name="OwnedIconsStackPanel" Orientation="Horizontal" HorizontalAlignment="Right">
                             <Button Command="{Binding Path=Data.OpenCodexLocallyCommand, Source={StaticResource CodexProxy}}" ToolTip="Open Locally"
                                     CommandParameter="{Binding}" Style="{StaticResource IconBtn}" tools:AP.IconKind="FileOutline"/>
+                            <Button Command="{Binding Path=Data.ShowInExplorerCommand, Source={StaticResource CodexProxy}}" ToolTip="Show in Explorer"
+                                    CommandParameter="{Binding}" Style="{StaticResource IconBtn}" tools:AP.IconKind="FolderEyeOutline"/>
                             <Button Command="{Binding Path=Data.OpenCodexOnlineCommand, Source={StaticResource CodexProxy}}" ToolTip="Open Online"
                                     CommandParameter="{Binding}" Style="{StaticResource IconBtn}" tools:AP.IconKind="Web"/>
                             <materialDesign:PackIcon Kind="Bookshelf" Visibility="{Binding Path=PhysicallyOwned,
