@@ -100,8 +100,10 @@ namespace COMPASS.ViewModels
 
         public void UpdateFromPercentage(double percentage)
         {
+            _progressMutex.WaitOne();
             TotalAmount = 100;
             Counter = (int)(percentage * 100);
+            _progressMutex.ReleaseMutex();
         }
 
         public void ResetCounter()

@@ -510,24 +510,28 @@
 
     <converters:MultiParamConverter x:Key="MultiParamConverter"/>
 
+
     <ContextMenu x:Key="CodexContextMenu" x:Shared="False">
         <MenuItem Header="Open Locally" tools:AP.IconKind="FileOutline"
-                  Command="{Binding Path=DataContext.CodexVM.OpenCodexLocallyCommand,
-                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                  CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent.DataContext}"/>
+                          Command="{Binding Path=DataContext.CodexVM.OpenCodexLocallyCommand,
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                          CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent.DataContext}"
+                          Style="{StaticResource {x:Type MenuItem}}" />
         <MenuItem Header="Open Online" tools:AP.IconKind="Web"
-                  Command="{Binding Path=DataContext.CodexVM.OpenCodexOnlineCommand,
-                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                  CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent.DataContext}"/>
+                          Command="{Binding Path=DataContext.CodexVM.OpenCodexOnlineCommand,
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                          CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent.DataContext}"
+                          Style="{StaticResource {x:Type MenuItem}}" />
         <Separator Style="{StaticResource MarginlessSeparator}"/>
         <MenuItem Header="Edit..." tools:AP.IconKind="Edit" InputGestureText="Ctrl + E"
-                  Command="{Binding Path=DataContext.CodexVM.EditCodexCommand,
-                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                  CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent.DataContext}"/>
+                          Command="{Binding Path=DataContext.CodexVM.EditCodexCommand,
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                          CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent.DataContext}"
+                          Style="{StaticResource {x:Type MenuItem}}" />
         <MenuItem tools:AP.IconKind="Favorite" InputGestureText="Ctrl + F"
-                  Command="{Binding Path=DataContext.CodexVM.FavoriteCodexCommand,
-                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                  CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}">
+                          Command="{Binding Path=DataContext.CodexVM.FavoriteCodexCommand,
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                          CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}">
             <MenuItem.Style>
                 <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
                     <Setter Property="Header" Value="Favorite"/>
@@ -541,14 +545,14 @@
             </MenuItem.Style>
         </MenuItem>
         <MenuItem tools:AP.IconKind="BookInformationVariant" InputGestureText="Ctrl + I"
-                  Command="{Binding DataContext.MVM.CodexInfoVM.ToggleCodexInfoCommand,
-                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+                          Command="{Binding DataContext.MVM.CodexInfoVM.ToggleCodexInfoCommand,
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
             <MenuItem.Style>
                 <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
                     <Setter Property="Header" Value="Show Info"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding DataContext.MVM.CodexInfoVM.ShowCodexInfo,
-                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Value="True">
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Value="True">
                             <Setter Property="Header" Value="Hide Info"/>
                         </DataTrigger>
                     </Style.Triggers>
@@ -557,25 +561,29 @@
         </MenuItem>
         <Separator Style="{StaticResource MarginlessSeparator}"/>
         <MenuItem Header="Renew MetaData" tools:AP.IconKind="FileRefreshOutline"
-                  Command="{Binding Path=DataContext.CodexVM.GetMetaDataCommand, 
-                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                  CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent.DataContext}"/>
+                          Command="{Binding Path=DataContext.CodexVM.GetMetaDataCommand, 
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                          CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent.DataContext}"
+                          Style="{StaticResource {x:Type MenuItem}}" />
         <MenuItem Header="Renew Cover" tools:AP.IconKind="ImageRefreshOutline"
-                  Command="{Binding Path=DataContext.CodexVM.GetCoverCommand, 
-                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                  CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent.DataContext}"/>
+                          Command="{Binding Path=DataContext.CodexVM.GetCoverCommand, 
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                          CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent.DataContext}"
+                          Style="{StaticResource {x:Type MenuItem}}" />
         <Separator Style="{StaticResource MarginlessSeparator}"/>
         <MenuItem Header="Show in Explorer" tools:AP.IconKind="FolderEyeOutline"
-                  Command="{Binding Path=DataContext.CodexVM.ShowInExplorerCommand, 
-                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                  CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent.DataContext}"/>
+                          Command="{Binding Path=DataContext.CodexVM.ShowInExplorerCommand, 
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                          CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent.DataContext}"
+                          Style="{StaticResource {x:Type MenuItem}}" />
         <MenuItem Header="Move to Collection" tools:AP.IconKind="FolderMoveOutline"
-                  ItemsSource="{Binding DataContext.MVM.CollectionVM.CollectionDirectories, 
-                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+                          ItemsSource="{Binding DataContext.MVM.CollectionVM.CollectionDirectories, 
+                                        RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                          Style="{StaticResource {x:Type MenuItem}}">
             <MenuItem.ItemContainerStyle>
                 <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
                     <Setter Property="MenuItem.Command" Value="{Binding Path=DataContext.CodexVM.MoveToCollectionCommand,
-                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                                        RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
                     <Setter Property="DataContext" Value="{Binding DataContext}"/>
                     <Setter Property="MenuItem.CommandParameter">
                         <Setter.Value>
@@ -589,15 +597,63 @@
             </MenuItem.ItemContainerStyle>
         </MenuItem>
         <MenuItem Header="Remove" tools:AP.IconKind="Delete" InputGestureText="Delete"
-                  ToolTip="Removes the item from COMPASS"
-                  Command="{Binding Path=DataContext.CodexVM.DeleteCodexCommand,
-                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                  CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent.DataContext}"/>
+                          ToolTip="Removes the item from COMPASS"
+                          Command="{Binding Path=DataContext.CodexVM.DeleteCodexCommand,
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                          CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent.DataContext}"
+                          Style="{StaticResource {x:Type MenuItem}}" />
         <MenuItem Header="Remove Forever" tools:AP.IconKind="DeleteForever" InputGestureText="Alt+Delete"
-                  Command="{Binding Path=DataContext.CodexVM.BanishCodexCommand,
-                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                  CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent.DataContext}"
-                  ToolTip="Removes the item from COMPASS and excludes it from future imports."/>
+                          Command="{Binding Path=DataContext.CodexVM.BanishCodexCommand,
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                          CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent.DataContext}"
+                          ToolTip="Removes the item from COMPASS and excludes it from future imports."
+                          Style="{StaticResource {x:Type MenuItem}}" />
+        <Separator>
+            <Separator.Style>
+                <Style TargetType="Separator" BasedOn="{StaticResource MarginlessSeparator}">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=DataContext.CodexVM.PluginContextMenuItems.Count, 
+                                        RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Value="0">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Separator.Style>
+        </Separator>
+        <MenuItem Header="Other Actions"
+            ItemsSource="{Binding DataContext.CodexVM.PluginContextMenuItems, 
+                                        RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+            <MenuItem.Style>
+                <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=DataContext.CodexVM.PluginContextMenuItems.Count, 
+                                        RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Value="0">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </MenuItem.Style>
+            <MenuItem.ItemContainerStyle>
+                <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
+                    <Setter Property="MenuItem.Command" Value="{Binding Path=DataContext.CodexVM.PluginContextMenuCommand,
+                                        RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                    <Setter Property="DataContext" Value="{Binding DataContext}"/>
+                    <Setter Property="MenuItem.Header" Value="{Binding Caption}"/>
+                    <Setter Property="MenuItem.CommandParameter">
+                        <Setter.Value>
+                            <MultiBinding Converter="{StaticResource MultiParamConverter}">
+                                <Binding Path="DataContext" RelativeSource="{RelativeSource self}"/>
+                               <!-- <Binding Path="DataContext" RelativeSource="{RelativeSource AncestorType=MenuItem, AncestorLevel=1}"/> -->
+								<Binding Path="SelectedItems" RelativeSource="{RelativeSource FindAncestor,AncestorType={x:Type Selector}}"/>
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </MenuItem.ItemContainerStyle>
+        </MenuItem>
+
     </ContextMenu>
 
     <ContextMenu x:Key="MultiCodexContextMenu" x:Shared="False"
@@ -645,6 +701,50 @@
                   Command="{Binding Path=DataContext.CodexVM.BanishCodicesCommand, 
                     RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
                   ToolTip="Removes the items from COMPASS and excludes them from future imports."/>
+		<Separator>
+			<Separator.Style>
+				<Style TargetType="Separator" BasedOn="{StaticResource MarginlessSeparator}">
+					<Setter Property="Visibility" Value="Visible" />
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Path=DataContext.CodexVM.PluginContextMenuItems.Count, 
+                                        RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Value="0">
+							<Setter Property="Visibility" Value="Collapsed" />
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Separator.Style>
+		</Separator>
+		<MenuItem Header="Other Actions"
+            ItemsSource="{Binding DataContext.CodexVM.PluginContextMenuItems, 
+                                        RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+			<MenuItem.Style>
+				<Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
+					<Setter Property="Visibility" Value="Visible" />
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Path=DataContext.CodexVM.PluginContextMenuItems.Count, 
+                                        RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Value="0">
+							<Setter Property="Visibility" Value="Collapsed" />
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</MenuItem.Style>
+			<MenuItem.ItemContainerStyle>
+				<Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
+					<Setter Property="MenuItem.Command" Value="{Binding Path=DataContext.CodexVM.PluginContextMenuCommand,
+                                        RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+					<Setter Property="DataContext" Value="{Binding DataContext}"/>
+					<Setter Property="MenuItem.Header" Value="{Binding Caption}"/>
+					<Setter Property="MenuItem.CommandParameter">
+						<Setter.Value>
+							<MultiBinding Converter="{StaticResource MultiParamConverter}">
+								<Binding Path="DataContext" RelativeSource="{RelativeSource self}"/>
+								<Binding Path="SelectedItems" RelativeSource="{RelativeSource FindAncestor,AncestorType={x:Type Selector}}"/>
+							</MultiBinding>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</MenuItem.ItemContainerStyle>
+		</MenuItem>
     </ContextMenu>
     <!--#endregion-->
 

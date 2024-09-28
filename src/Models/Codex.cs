@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using COMPASS.Models.CodexProperties;
+using COMPASS.Sdk.Interfaces.Models;
 using COMPASS.Tools;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Linq;
 
 namespace COMPASS.Models
 {
-    public class Codex : ObservableObject, IHasID, IHasCodexMetadata
+    public class Codex : ObservableObject, IHasID, IHasCodexMetadata, ICodex
     {
         #region Constructors
 

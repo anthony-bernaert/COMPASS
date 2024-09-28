@@ -593,6 +593,64 @@
         <TabItem Header="What's New"  tools:AP.IconKind="Update">
             <wv2:WebView2 Name="ChangelogWebView" DefaultBackgroundColor=""/>
         </TabItem>
+        <TabItem Header="Plugins" tools:AP.IconKind="Puzzle">
+            <ScrollViewer>
+                <StackPanel Margin="20">
+                    <Border x:Name="PluginSettings" Style="{StaticResource SettingsContainer}">
+                        <StackPanel>
+                            <TextBlock Text="Active plugins" Style="{StaticResource SectionTitle}"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="Name"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="Version" />
+                                <TextBlock Text="Description" Grid.Row="0" Grid.Column="2"/>
+                                <TextBlock Text="Author" Grid.Row="0" Grid.Column="3"/>
+
+                                <Rectangle Style="{StaticResource SeparatorStyle}" Grid.ColumnSpan="4" Grid.Column="0"
+                                           Grid.Row="1"/>
+
+                                <ItemsControl Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="0"
+                                              ItemsSource="{Binding MVM.Plugins}" Margin="10,0">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="2*"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <ColumnDefinition Width="3*"/>
+                                                    <ColumnDefinition Width="2*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock TextWrapping="Wrap" Text="{Binding PluginDescriptor.FriendlyName}" VerticalAlignment="Top"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding PluginDescriptor.Version}" VerticalAlignment="Top"/>
+                                                <TextBlock TextWrapping="Wrap" Grid.Column="2" Text="{Binding PluginDescriptor.Description}" VerticalAlignment="Top"/>
+                                                <TextBlock TextWrapping="Wrap" Grid.Column="3" Text="{Binding PluginDescriptor.Author}" VerticalAlignment="Top"/>
+                                                
+                                                <Rectangle Style="{StaticResource SeparatorStyle}" Grid.ColumnSpan="4"
+                                                           Grid.Column="0" Grid.Row="1"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
         <TabItem Header="About"  tools:AP.IconKind="InformationCircleOutline">
             <ScrollViewer>
                 <StackPanel Orientation="Vertical">

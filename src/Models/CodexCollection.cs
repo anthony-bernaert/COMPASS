@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using COMPASS.Interfaces;
 using COMPASS.Models.Enums;
 using COMPASS.Models.XmlDtos;
+using COMPASS.Sdk.Interfaces;
+using COMPASS.Sdk.Interfaces.Models;
 using COMPASS.Services;
 using COMPASS.Tools;
 using COMPASS.ViewModels;

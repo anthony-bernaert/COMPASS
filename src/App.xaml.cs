@@ -5,8 +5,14 @@ using COMPASS.Services;
 using COMPASS.Tools;
 using COMPASS.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Windows;
+using COMPASS.Windows;
+using COMPASS.Sdk.Interfaces.Plugins;
+using COMPASS.Infrastructure;
 
 namespace COMPASS
 {
@@ -33,29 +39,44 @@ namespace COMPASS
             }
         }
 
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            //init the container
+            var builder = new ContainerBuilder();
+
+            builder.RegisterType<ApplicationDispatcher>().As<IDispatcher>();
+            builder.RegisterType<WindowedNotificationService>().Keyed<INotificationService>(NotificationDisplayType.Windowed);
+            builder.RegisterType<WindowedNotificationService>().Keyed<INotificationService>(NotificationDisplayType.Toast); //use windowed for everything for now
+
+            // Register MainView and MainViewModel
+            builder.RegisterType<MainWindow>().AsSelf().SingleInstance();
+            builder.RegisterType<MainViewModel>().AsSelf().InstancePerDependency();
+
+            // Load the plugins and register them in the IoC container
+            var pluginLoader = new PluginLoader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins"));
+            pluginLoader.LoadAndRegisterPlugins(builder);
+
+            _container = builder.Build();
+
+            var mainWindow = _container.Resolve<MainWindow>();
+            mainWindow.Show();
+        }
+
         private static IContainer? _container;
 
         public static IContainer Container
         {
-            get
-            {
-                if (_container is null)
-                {
-                    //init the container
-                    var builder = new ContainerBuilder();
-
-                    builder.RegisterType<ApplicationDispatcher>().As<IDispatcher>();
-                    builder.RegisterType<WindowedNotificationService>().Keyed<INotificationService>(NotificationDisplayType.Windowed);
-                    builder.RegisterType<WindowedNotificationService>().Keyed<INotificationService>(NotificationDisplayType.Toast); //use windowed for everything for now
-
-                    _container = builder.Build();
-                }
-                return _container;
-            }
+            get => _container;
             set => _container = value;
         }
 
         private static IDispatcher? _dispatcher;
         public static IDispatcher SafeDispatcher => _dispatcher ??= Container.Resolve<IDispatcher>();
+
+        #region Plugin loading
+        
+        #endregion
     }
 }

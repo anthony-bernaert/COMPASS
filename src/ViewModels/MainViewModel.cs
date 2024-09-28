@@ -2,12 +2,14 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using COMPASS.Models;
+using COMPASS.Sdk.Interfaces.Plugins;
 using COMPASS.Services;
 using COMPASS.Tools;
 using COMPASS.ViewModels.Layouts;
 using COMPASS.Windows;
 using ImageMagick;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -18,7 +20,7 @@ namespace COMPASS.ViewModels
 {
     public class MainViewModel : ObservableObject
     {
-        public MainViewModel()
+        public MainViewModel(IEnumerable<IPlugin> plugins)
         {
             Logger.Init();
             ViewModelBase.MVM = this;
@@ -30,6 +32,20 @@ namespace COMPASS.ViewModels
             LeftDockVM = new(this);
             CodexInfoVM = new(this);
             SettingsViewModel.GetInstance().MVM = this;
+
+            // Initialize plugin functionality
+            foreach(var plugin in plugins)
+            {
+                if (plugin is ICodexContextMenuPlugin)
+                {
+                    _currentLayout.CodexVM.PluginContextMenuItems.AddRange(((ICodexContextMenuPlugin)plugin).MenuItems);
+                }
+                if (plugin is IImportSourcePlugin)
+                {
+                    LeftDockVM.PluginImportSourceItems.AddRange(((IImportSourcePlugin)plugin).ImportSources);
+                }
+            }
+            Plugins = plugins;
 
             //Update stuff
             WebDriverService.InitWebdriver();
@@ -166,6 +182,10 @@ namespace COMPASS.ViewModels
         private RelayCommand<LayoutViewModel.Layout>? _changeLayoutCommand;
         public RelayCommand<LayoutViewModel.Layout> ChangeLayoutCommand => _changeLayoutCommand ??= new(ChangeLayout);
         public void ChangeLayout(LayoutViewModel.Layout layout) => CurrentLayout = LayoutViewModel.GetLayout(layout);
+        #endregion
+
+        #region Plugins
+        public IEnumerable<IPlugin> Plugins { get; set; }
         #endregion
     }
 }

@@ -1,8 +1,12 @@
-﻿using COMPASS.Models;
+﻿using COMPASS.Factories;
+using COMPASS.Models;
 using COMPASS.Models.Enums;
+using COMPASS.Sdk.Helpers;
+using COMPASS.Sdk.Interfaces.Plugins;
 using COMPASS.Services;
 using COMPASS.Tools;
 using COMPASS.Windows;
+using ImageMagick.Drawing;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -125,6 +129,43 @@ namespace COMPASS.ViewModels.Import
             foreach (Codex codex in newCodices)
             {
                 codex.RefreshThumbnail();
+            }
+        }
+
+        public static async Task ImportFromPluginAsync(ImportSourceItem importSourceItem)
+        {
+            var targetCollection = MainViewModel.CollectionVM.CurrentCollection;
+
+            var progressVM = ProgressViewModel.GetInstance();
+
+            progressVM.TotalAmount = -1; // We don't know this yet
+            progressVM.ResetCounter();
+            progressVM.Text = "Importing files";
+
+            var progress = new ImportProgressReporter((itemsDone, totalItems, message) =>
+            {
+                progressVM.Text = message ?? progressVM.Text;
+                progressVM.UpdateFromPercentage(1.0 * itemsDone / totalItems);
+            });
+            var codexFactory = new CodexFactory(targetCollection);
+            var newCodices = new List<Codex>();
+            try
+            {
+                var codexEnumerator = importSourceItem.ImportAsync!(codexFactory, progress, ProgressViewModel.GlobalCancellationTokenSource);
+                await foreach(var codex in codexEnumerator)
+                {
+                    if (codex is Codex) {
+                        newCodices.Add((Codex)codex);
+                    }
+                }
+
+                targetCollection.AllCodices.AddRange(newCodices);
+                await FinishImport(newCodices);
+            } catch(OperationCanceledException ex)
+            {
+                Logger.Warn("Plugin import has been cancelled", ex);
+                await Task.Run(() => ProgressViewModel.GetInstance().ConfirmCancellation());
+                return;
             }
         }
     }

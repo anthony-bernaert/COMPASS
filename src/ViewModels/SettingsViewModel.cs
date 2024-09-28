@@ -6,6 +6,7 @@ using COMPASS.Models.CodexProperties;
 using COMPASS.Models.Enums;
 using COMPASS.Models.Filters;
 using COMPASS.Models.Preferences;
+using COMPASS.Sdk.Interfaces.Plugins;
 using COMPASS.Services;
 using COMPASS.Tools;
 using COMPASS.ViewModels.Import;

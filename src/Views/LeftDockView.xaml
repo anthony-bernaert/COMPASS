@@ -726,6 +726,16 @@
                         <TextBlock Text="Other" Style="{StaticResource Categorizer}"/>
                         <Button tools:AP.IconKind="Sack" Style="{StaticResource HighlightedButton}" Content="From a .satchel file"
                                 Command="{Binding ImportBooksFromSatchelCommand}"/>
+
+                        <ItemsControl ItemsSource="{Binding PluginImportSourceItems}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button tools:AP.IconKind="Puzzle" Style="{StaticResource HighlightedButton}" Content="{Binding Caption}"
+                                        Command="{Binding DataContext.ImportFromPluginCommand,
+                                                                RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </StackPanel>
                 </ScrollViewer>
             </ContentControl>

@@ -3,10 +3,13 @@ using CommunityToolkit.Mvvm.Input;
 using COMPASS.Interfaces;
 using COMPASS.Models;
 using COMPASS.Models.Enums;
+using COMPASS.Sdk.Helpers;
 using COMPASS.Services;
 using COMPASS.Tools;
 using COMPASS.ViewModels.Import;
 using COMPASS.Windows;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace COMPASS.ViewModels
@@ -90,5 +93,11 @@ namespace COMPASS.ViewModels
         }
         #endregion
 
+        #region Plugin POC
+        public ObservableCollection<ImportSourceItem> PluginImportSourceItems { get; set; } = new(new List<ImportSourceItem>());
+
+        private AsyncRelayCommand<ImportSourceItem>? _importFromPluginCommand;
+        public AsyncRelayCommand<ImportSourceItem> ImportFromPluginCommand => _importFromPluginCommand ??= new(ImportViewModel.ImportFromPluginAsync!);
+        #endregion
     }
 }

@@ -17,12 +17,12 @@ namespace COMPASS.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainViewModel mvm)
         {
             InitializeComponent();
 
             //set Itemsources for databinding
-            MainViewModel = new MainViewModel();
+            MainViewModel = mvm;
             DataContext = MainViewModel;
         }
 

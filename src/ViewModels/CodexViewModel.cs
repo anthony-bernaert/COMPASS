@@ -5,6 +5,9 @@ using COMPASS.Models;
 using COMPASS.Models.CodexProperties;
 using COMPASS.Models.Enums;
 using COMPASS.Models.XmlDtos;
+using COMPASS.Sdk.Helpers;
+using COMPASS.Sdk.Interfaces.Models;
+using COMPASS.Sdk.Interfaces.Plugins;
 using COMPASS.Services;
 using COMPASS.Tools;
 using COMPASS.ViewModels.Sources;
@@ -13,6 +16,7 @@ using GongSolutions.Wpf.DragDrop;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -568,6 +572,25 @@ namespace COMPASS.ViewModels
             {
                 targetCodex.Tags.Add(toAdd);
                 MainViewModel.CollectionVM.FilterVM.ReFilter();
+            }
+        }
+        #endregion
+
+        #region Plugin POC
+        public ObservableCollection<CodexContextMenuItem> PluginContextMenuItems { get; set; } = new(new List<CodexContextMenuItem>());
+
+        private RelayCommand<object[]>? _pluginContextMenuCommand;
+        public RelayCommand<object[]> PluginContextMenuCommand => _pluginContextMenuCommand ??= new(PluginContextMenuAction);
+        public void PluginContextMenuAction(object[]? par)
+        {
+            if (par == null) return;
+
+            List<ICodex>? toEditList = ((IEnumerable)par[1])?.Cast<ICodex>().ToList();
+            if (toEditList?.Count > 0)
+            {
+                var pluginItem = (CodexContextMenuItem)par[0];
+
+                pluginItem?.Action?.Invoke(toEditList!);
             }
         }
         #endregion
