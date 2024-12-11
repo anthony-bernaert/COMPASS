@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using COMPASS.Common.Controls;
 using COMPASS.Common.Interfaces;
 using COMPASS.Common.Services.FileSystem;
 using COMPASS.Common.ViewModels;
@@ -27,6 +28,7 @@ public partial class App : Application
             desktop.MainWindow = MainWindow;
 
             Container = BuildContainer(desktop.MainWindow);
+            MainWindow.InitializeWindowEventHandlers(); // FIXME shouldn't be necessary if Container could be assigned before instantiating MainWindow
 
             desktop.MainWindow.DataContext = new MainViewModel();
         }
@@ -34,7 +36,7 @@ public partial class App : Application
         base.OnFrameworkInitializationCompleted();
     }
 
-    public static Window MainWindow { get; private set; }
+    public static CompassWindow MainWindow { get; private set; }
 
     public static ContainerBuilder ContainerBuilder { get; set; }
     public static IContainer Container { get; set; }

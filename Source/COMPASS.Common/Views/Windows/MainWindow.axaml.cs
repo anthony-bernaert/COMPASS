@@ -1,10 +1,11 @@
 ﻿using Avalonia.Controls;
+using COMPASS.Common.Controls;
 using COMPASS.Common.Services;
 using COMPASS.Common.ViewModels;
 
 namespace COMPASS.Common.Views.Windows;
 
-public partial class MainWindow : Window
+public partial class MainWindow : CompassWindow
 {
     public MainWindow()
     {
@@ -18,4 +19,5 @@ public partial class MainWindow : Window
         MainViewModel.CollectionVM.CurrentCollection.Save();
         PreferencesService.GetInstance().SavePreferences();
     }
+
 }
