@@ -8,7 +8,8 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
         x:Class="COMPASS.Common.Views.Windows.MainWindow"
         Icon="/Assets/COMPASS.ico"
-        ExtendClientAreaTitleBarHeightHint="45"
+        ExtendClientAreaTitleBarHeightHint="{OnPlatform 45, macOS=50}"
+        ExtendClientAreaChromeHints="Default, PreferSystemChrome, OSXThickTitleBar"
         Closing="Window_Closing"
         Title="COMPASS" Background="{StaticResource WindowBackground}">
   <Window.Styles>

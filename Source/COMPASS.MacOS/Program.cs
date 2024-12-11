@@ -41,6 +41,9 @@ class Program
         builder.RegisterType<EnvironmentVarsService>().As<IEnvironmentVarsService>().SingleInstance();
         builder.RegisterInstance<IWebDriverService>(new WebDriverService());
 
+        //Register event dependencies
+        builder.RegisterType<MainWindowEventHandler>().AsImplementedInterfaces().InstancePerLifetimeScope();
+
         //Don't build yet, App will also add some registrations
         App.ContainerBuilder = builder;
     }
