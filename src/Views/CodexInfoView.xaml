@@ -79,7 +79,7 @@
                     <Border CornerRadius="5" SnapsToDevicePixels="True" Grid.ColumnSpan="2"  
                             Width="200" Height="270" Margin="10">
                         <Border.Background>
-                            <ImageBrush ImageSource="{Binding CoverArt, IsAsync=True ,Converter={StaticResource UriToBitmapConverter}, 
+                            <ImageBrush Stretch="Uniform" ImageSource="{Binding CoverArt, IsAsync=True ,Converter={StaticResource UriToBitmapConverter}, 
                                 ConverterParameter=True, Mode=OneWay, TargetNullValue=Media\\CoverPlaceholder.png}"/>
                         </Border.Background>
                         <Border.Effect>
