@@ -16,6 +16,8 @@
         FileExtension,
         HasBrokenPath,
         Domain,
-        Empty
+        Empty,
+        StartDateAdded,
+        StopDateAdded,
     }
 }

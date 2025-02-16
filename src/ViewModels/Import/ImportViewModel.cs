@@ -6,13 +6,17 @@ using COMPASS.Windows;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.Input;
+using COMPASS.Models.Filters;
 
 namespace COMPASS.ViewModels.Import
 {
     public static class ImportViewModel
     {
+
         public static async Task Import(ImportSource source) => await Import(source, MainViewModel.CollectionVM.CurrentCollection);
         public static async Task Import(ImportSource source, CodexCollection targetCollection)
         {
@@ -134,6 +138,8 @@ namespace COMPASS.ViewModels.Import
             {
                 codex.RefreshThumbnail();
             }
+            MainViewModel.CollectionVM.FilterVM.ClearFilters();
+            MainViewModel.CollectionVM.FilterVM.AddFilter(new LastImportFilter(newCodices));
         }
     }
 }
