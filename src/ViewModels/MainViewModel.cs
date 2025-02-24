@@ -33,13 +33,14 @@ namespace COMPASS.ViewModels
 
             //Update stuff
             WebDriverService.InitWebdriver();
-            InitAutoUpdates();
+            //InitAutoUpdates();
 
             //Start timer that periodically checks if there is an internet connection
             InitConnectionTimer();
 
             MagickNET.SetGhostscriptDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "gs"));
         }
+
 
         #region Init Functions
 
