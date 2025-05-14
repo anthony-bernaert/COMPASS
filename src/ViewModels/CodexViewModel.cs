@@ -211,9 +211,7 @@ namespace COMPASS.ViewModels
         public static void ShowInExplorer(Codex? toShow)
         {
             if (String.IsNullOrEmpty(toShow?.Sources.Path) || !File.Exists(toShow.Sources.Path)) return;
-            string? folderPath = Path.GetDirectoryName(toShow.Sources.Path);
-            if (String.IsNullOrEmpty(folderPath) || !Directory.Exists(folderPath)) return;
-            IOService.ShowInExplorer(folderPath);
+            IOService.ShowInExplorer(toShow.Sources.Path);
         }
 
         //Move Codex to other CodexCollection

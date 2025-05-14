@@ -215,12 +215,8 @@ namespace COMPASS.Services
             {
                 throw new ArgumentException("path does not exist");
             }
-
-            ProcessStartInfo startInfo = new()
-            {
-                Arguments = path,
-                FileName = "explorer.exe"
-            };
+            // Open the directory if the path points to a directory, otherwise select the file in its directory
+            ProcessStartInfo startInfo = new("explorer.exe", Directory.Exists(path) ? path : $"/select,\"{path}\"");
             Process.Start(startInfo);
         }
 
